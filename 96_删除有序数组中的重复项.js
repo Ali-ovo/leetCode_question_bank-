@@ -1,3 +1,4 @@
+
 // const arr = []
 // let idx = 0
 // for (let i = 0; i < nums.length; i++) {
@@ -7,9 +8,9 @@
 
 // console.log(arr);
 
-var nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4];
+var nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4]
 
-// if (!nums.length) return 0;
+if (!nums.length) return 0;
 let i = 0;
 for (var j = 1; j < nums.length; j++) {
   if (nums[j] !== nums[i]) {
@@ -17,4 +18,4 @@ for (var j = 1; j < nums.length; j++) {
     nums[i] = nums[j];
   }
 }
-console.log(i + 1);
+console.log(i+1);
