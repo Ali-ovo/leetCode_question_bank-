@@ -5,10 +5,8 @@ function areDeeplyEqual(o1, o2) {
   if (o1 !== o1 && o2 !== o2) return true
 
   if (typeof o1 === 'object') {
-    const keys1 = Object.keys(o1)
-    const keys2 = Object.keys(o2)
-    if (keys1.length !== keys2.length) return false
-    for (let key of keys1) {
+    if (Object.keys(o1).length !== Object.keys(o2).length) return false
+    for (let key in o1) {
       if (!areDeeplyEqual(o1[key], o2[key])) return false
     }
   }
