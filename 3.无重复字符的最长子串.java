@@ -29,7 +29,7 @@ class Solution {
 
 class lengthOfLongestSubstring {
     public static void main(String[] args) {
-        SolutionlengthOfLongestSubstring solution = new SolutionlengthOfLongestSubstring();
+        Solution solution = new Solution();
         System.out.println(solution.lengthOfLongestSubstring("dvdf"));
     }
 
