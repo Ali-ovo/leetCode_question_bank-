@@ -60,7 +60,7 @@ class Solution {
 
 class MainfindMedianSortedArrays {
     public static void main(String[] args) {
-        SolutionfindMedianSortedArrays solution = new SolutionfindMedianSortedArrays();
+        Solution solution = new Solution();
         int[] nums1 = { 1, 2 };
         int[] nums2 = { 3, 4 };
         double result = solution.findMedianSortedArrays(nums1, nums2);
