@@ -10,39 +10,32 @@
  * @param {string} p
  * @return {boolean}
  */
-var isMatch = function (s, p) {
-  if (s == null || p == null) return false
-
-  const sLen = s.length,
-    pLen = p.length
-
-  const dp = new Array(sLen + 1)
-  for (let i = 0; i < dp.length; i++) {
-    dp[i] = new Array(pLen + 1).fill(false) // 将项默认为false
-  }
-  // base case
-  dp[0][0] = true
-  for (let j = 1; j < pLen + 1; j++) {
-    if (p[j - 1] == '*') dp[0][j] = dp[0][j - 2]
-  }
-
-  // 迭代
-  for (let i = 1; i < sLen + 1; i++) {
-    for (let j = 1; j < pLen + 1; j++) {
-      if (s[i - 1] == p[j - 1] || p[j - 1] == '.') {
-        dp[i][j] = dp[i - 1][j - 1]
-      } else if (p[j - 1] == '*') {
-        if (s[i - 1] == p[j - 2] || p[j - 2] == '.') {
-          dp[i][j] = dp[i][j - 2] || dp[i - 1][j - 2] || dp[i - 1][j]
-        } else {
-          dp[i][j] = dp[i][j - 2]
-        }
-      }
+var isMatch = function (string, pattern) {
+   // early return when pattern is empty
+   if (!pattern) {
+		// returns true when string and pattern are empty
+		// returns false when string contains chars with empty pattern
+        return !string;
     }
+    
+	// check if the current char of the string and pattern match when the string has chars
+    const hasFirstCharMatch = Boolean(string) && (pattern[0] === '.' || pattern[0] === string[0]);
 
-    console.log('%c [ dp ]-29', 'font-size:13px; background:#c211a4; color:#ff55e8;', dp)
-  }
-  return dp[sLen][pLen] // 长sLen的s串 是否匹配 长pLen的p串
+    // track when the next character * is next in line in the pattern
+    if (pattern[1] === '*') {
+        // if next pattern match (after *) is fine with current string, then proceed with it (s, p+2).  That's because the current pattern may be skipped.
+        // otherwise check hasFirstCharMatch. That's because if we want to proceed with the current pattern, we must be sure that the current pattern char matches the char
+		// If hasFirstCharMatch is true, then do the recursion with next char and current pattern (s+1, p).  That's because current char matches the pattern char. 
+        return (
+            isMatch(string, pattern.slice(2)) || 
+            (hasFirstCharMatch && isMatch(string.slice(1), pattern))
+        );
+    }
+    
+    // now we know for sure that we need to do 2 simple actions
+	// check the current pattern and string chars
+	// if so, then can proceed with next string and pattern chars (s+1, p+1)
+    return hasFirstCharMatch ? isMatch(string.slice(1), pattern.slice(1)) : false;
 }
 // @lc code=end
 
